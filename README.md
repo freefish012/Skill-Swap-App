@@ -1,56 +1,74 @@
-# Welcome to your Expo app 👋
+# SkillSwap
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform peer-to-peer skill exchange mobile and web application built with **React Native**, **Expo (SDK 58)**, **TypeScript**, and **Supabase**. Users can discover skills, send learning requests, host live video tutoring sessions, message partners in real time, and earn or spend SkillCoins through an integrated wallet system.
 
-## Get started
+🌐 **Live Web Demo:** [https://freefish012-skillswap.expo.app](https://freefish012-skillswap.expo.app)
 
-1. Install dependencies
+---
 
+## Demo Accounts
+
+You can sign in with any of the following pre-configured demo accounts:
+
+| Full Name | Email | Password |
+| :--- | :--- | :--- |
+| Alex Johnson | `alex@example.com` | `cust123` |
+| Sophia Chen | `sophia@example.com` | `cust123` |
+| Carlos Gomez | `carlos@example.com` | `cust123` |
+| David Miller | `david@example.com` | `cust123` |
+| Elena Rostova | `elena@example.com` | `cust123` |
+---
+
+## Core Features
+
+* **Authentication & Profiles:** User registration, login, and profile management backed by Supabase and React Context (`auth_context.tsx`).
+* **Skill Discovery & Posting:** Browse available courses and peer instructors (`explore.tsx`, `detailPost.tsx`, `lecturerProfile.tsx`) or publish new skills to teach (`post.tsx`).
+* **Session & Request Management:** 3-tab session workflow (`Upcoming`, `Past`, `Requests`) supporting incoming teaching approvals, outgoing learning requests, cancellations, and session completion (`session.tsx`).
+* **Real-Time Video Calling:** Automatic video meeting link generation upon session approval (`daily.ts`) so learners and teachers can join sessions directly from the app.
+* **Coin Wallet & Ledger:** Automated transaction tracking (`wallet.tsx`) that creates `PENDING` coin earnings when a request is approved and credits the teacher's `coin_balance` (`EARNED`) once a session is marked complete.
+* **Direct Messaging:** Built-in partner messaging (`messages.tsx`) accessible from session cards and skill listings.
+
+---
+
+## Tech Stack
+
+* **Frontend:** React Native, Expo SDK 58, Expo Router, TypeScript
+* **Backend & Database:** Supabase (PostgreSQL, Row-Level Security, Edge Functions)
+* **Video Conferencing:** Daily.co / WebRTC Meeting Room Integration
+* **Hosting & Deployment:** EAS Hosting (`freefish012-skillswap.expo.app`)
+
+---
+
+## Project Structure
+
+* `src/app/` – File-based screens (`_layout.tsx`, `index.tsx`, `home.tsx`, `explore.tsx`, `detailPost.tsx`, `post.tsx`, `lecturerProfile.tsx`, `messages.tsx`, `session.tsx`, `wallet.tsx`, `profile.tsx`, `navbar.tsx`)
+* `src/context/` – Authentication state management (`auth_context.tsx`)
+* `src/lib/` – Supabase client configuration (`supabase.ts`) and video room helper (`daily.ts`)
+
+---
+
+## Getting Started
+
+1. **Install dependencies:**
    ```bash
    npm install
-   ```
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
 ```
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+2. **Configure environment variables:**
+Ensure your Supabase project URL and anonymous key are configured in `src/lib/supabase.ts` (or `.env`).
+3. **Start the development server:**
+```bash
+npx expo start
 
-### Other setup steps
+```
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
 
-## Learn more
+* Press `w` to open in a web browser, or scan the QR code using the **Expo Go (SDK 58)** app on iOS/Android.
 
-To learn more about developing your project with Expo, look at the following resources:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+4. **Build and deploy for web:**
+```bash
+npx expo export --platform web
+npx eas-cli deploy --prod
 
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
